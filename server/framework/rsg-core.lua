@@ -3,7 +3,7 @@ SetTimeout(0, function()
 
 	GetPlayer = RSG.Functions.GetPlayer
 
-	if GetResourceState('ox_inventory') == 'missing' then
+	if GetResourceState('rsg-inventory') == 'missing' then
 		function RemoveItem(playerId, item, slot)
 			local player = GetPlayer(playerId)
 

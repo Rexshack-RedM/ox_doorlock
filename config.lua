@@ -3,19 +3,10 @@
 Config = {}
 
 ---Trigger a notification on the client when the door state is successfully updated.
-Config.Notify = false
+Config.Notify = true
 
 ---Create a persistent notification while in-range of a door, prompting to lock/unlock.
-Config.DrawTextUI = false
-
----Set the properties used by [DrawSprite](https://docs.fivem.net/natives/?_0xE7FFAE5EBF23D890).
-Config.DrawSprite = {
-    -- Unlocked
-    [0] = { 'mas_sprite', 'key', 0, 0, 0.018, 0.018, 0, 255, 255, 255, 100 },
-
-    -- Locked
-    [1] = { 'mas_sprite', 'key_lock', 0, 0, 0.018, 0.018, 0, 255, 255, 255, 100 },
-}
+Config.DrawTextUI = true
 
 ---Allow the specified ace principal to use 'command.doorlock'.
 Config.CommandPrincipal = 'group.admin'
