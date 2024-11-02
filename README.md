@@ -2,7 +2,7 @@
 
 Thanks to the Overextended team, I managed to adapt this FiveM script to work in RedM. No more listing door hashes one by one, and make sure the game correctly recognizes the door object as a door. Here’s the [tutorial](https://youtu.be/bDoabIL_tpo?si=6sn0uwW2GrXivNEv) to make the game recognize it as a door.
 
-Door management resource, with compatibility for [rsg-core](https://github.com/Rexshack-RedM/rsg-core), [VORP](https://github.com/VORPCORE/vorp_core-lua) and [RedEM:RP](https://github.com/RedEM-RP/redem_roleplay).
+Door management resource, with compatibility for only [rsg-core](https://github.com/Rexshack-RedM/rsg-core) for now and partial [VORP](https://github.com/VORPCORE/vorp_core-lua).
 Successor to nui_doorlock with less scuff and more stuff.
 
 ## Dependencies
