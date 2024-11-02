@@ -6,7 +6,7 @@ function GetPlayer(playerId)
 end
 
 function GetCharacterId(player)
-	return player.charIdentifier
+    return player.charIdentifier
 end
 
 function IsPlayerInGroup(player, filter)

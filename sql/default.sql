@@ -1,6 +1,6 @@
 /*
-	Run this file after ox_doorlock.sql
-	Braithwaite Manor door
+    Run this file after ox_doorlock.sql
+    Braithwaite Manor door
 */
 
 INSERT INTO `ox_doorlock` (`id`, `name`, `data`) VALUES
