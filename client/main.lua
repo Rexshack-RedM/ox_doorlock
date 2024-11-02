@@ -332,60 +332,23 @@ CreateThread(function()
 	local lockDoor = locale('lock_door')
 	local unlockDoor = locale('unlock_door')
 	local showUI
-	local drawSprite = Config.DrawSprite
-
-	if drawSprite then
-		local sprite1 = drawSprite[0]?[1]
-		local sprite2 = drawSprite[1]?[1]
-
-		if sprite1 then
-			RequestStreamedTextureDict(sprite1, true)
-		end
-
-		if sprite2 then
-			RequestStreamedTextureDict(sprite2, true)
-		end
-	end
-
-	local SetDrawOrigin = SetDrawOrigin
-	local ClearDrawOrigin = ClearDrawOrigin
-	local DrawSprite = drawSprite and DrawSprite
 
 	while true do
 		local num = #nearbyDoors
 
 		if num > 0 then
-			local ratio = drawSprite and 1.7
 			for i = 1, num do
 				local door = nearbyDoors[i]
 
 				if door.distance < door.maxDistance then
-					if door.distance < (ClosestDoor?.distance or 10) then
+					if not ClosestDoor or door.distance < ClosestDoor.distance then
 						ClosestDoor = door
-					end
-
-					if drawSprite and not door.hideUi then
-						local sprite = drawSprite[door.state]
-
-						if sprite then
-							local doorEntity = door.doors and door.doors[1].entity or door.entity
-							local doorBone = getDoorHandPoint(doorEntity)
-							if doorBone.x == 0 then doorBone = getEntityCenterCoords(doorEntity) end
-							-- print(doorBone, doorEntity)
-							if door.distance < (door.maxDistance / 2) then
-								SetDrawOrigin(doorBone.x, doorBone.y, doorBone.z)
-								DrawSprite(sprite[1], sprite[2], sprite[3], sprite[4], sprite[5], sprite[6] * ratio, sprite[7], sprite[8], sprite[9], sprite[10], sprite[11])
-								ClearDrawOrigin()
-							else
-								SetDrawOrigin(doorBone.x, doorBone.y, doorBone.z)
-								DrawSprite(sprite[1], 'point', sprite[3], sprite[4], 0.013020833333333,0.027777777777778, sprite[7], sprite[8], sprite[9], sprite[10], sprite[11])
-								ClearDrawOrigin()
-							end
-						end
 					end
 				end
 			end
-		else ClosestDoor = nil end
+		else
+			ClosestDoor = nil
+		end
 
 		if ClosestDoor and ClosestDoor.distance < ClosestDoor.maxDistance then
 			if Config.DrawTextUI and not ClosestDoor.hideUi and ClosestDoor.state ~= showUI then
@@ -404,6 +367,7 @@ CreateThread(function()
 		Wait(num > 0 and 0 or 500)
 	end
 end)
+
 
 exports('useClosestDoor', useClosestDoor)
 exports('getClosestDoor', function() return ClosestDoor end)

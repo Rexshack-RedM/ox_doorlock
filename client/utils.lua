@@ -61,9 +61,9 @@ local function pickLock(entity)
 	TaskTurnPedToFaceCoord(cache.ped, door.coords.x, door.coords.y, door.coords.z, 4000)
 	Wait(500)
 
-	local animDict = lib.requestAnimDict('mp_common_heist')
+	----local animDict = lib.requestAnimDict('mp_common_heist')
 
-	TaskPlayAnim(cache.ped, animDict, 'pick_door', 3.0, 1.0, -1, 49, 0, true, true, true)
+	---TaskPlayAnim(cache.ped, animDict, 'pick_door', 3.0, 1.0, -1, 49, 0, true, true, true)
 
 	local success = lib.skillCheck(door.lockpickDifficulty or Config.LockDifficulty)
 	local rand = math.random(1, success and 100 or 5)

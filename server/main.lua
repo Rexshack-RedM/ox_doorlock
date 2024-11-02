@@ -182,21 +182,31 @@ end
 ---@param removeItem? boolean
 ---@return string?
 function DoesPlayerHaveItem(player, items, removeItem)
-	local playerId = player.source or player.PlayerData.source
-
-	for i = 1, #items do
-		local item = items[i]
-		local itemName = item.name or item
-		local data = ox_inventory:Search(playerId, 'slots', itemName, item.metadata)[1]
-
-		if data and data.count > 0 then
-			if removeItem or item.remove then
-				ox_inventory:RemoveItem(playerId, itemName, 1, nil, data.slot)
-			end
-
-			return itemName
-		end
-	end
+    local RSGCore = exports['rsg-core']:GetCoreObject()
+    local playerId = player.source or player.PlayerData.source
+    
+    for i = 1, #items do
+        local item = items[i]
+        local itemName = item.name or item
+        
+        -- Get player's inventory
+        local Player = RSGCore.Functions.GetPlayer(playerId)
+        if Player then
+            -- Check if player has the item
+            local hasItem = Player.Functions.GetItemByName(itemName)
+            
+            if hasItem and hasItem.amount > 0 then
+                -- Remove item if specified
+                if removeItem or item.remove then
+                    Player.Functions.RemoveItem(itemName, 1)
+                    -- Trigger inventory update
+                    TriggerClientEvent('inventory:client:ItemBox', playerId, RSGCore.Shared.Items[itemName], "remove")
+                end
+                return itemName
+            end
+        end
+    end
+    return false
 end
 
 local function isAuthorised(playerId, door, lockpick)

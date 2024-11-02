@@ -24,7 +24,7 @@ function utils.getFilesInDirectory(path, pattern)
 	return files, fileCount
 end
 
-local frameworks = { 'rsg-core', 'vorp_core', 'redem_roleplay' }
+local frameworks = { 'rsg-core', 'vorp_core' }
 local sucess = false
 
 for i = 1, #frameworks do
