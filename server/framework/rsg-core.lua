@@ -1,5 +1,9 @@
+local resourceName = 'rsg-core'
+
+if not GetResourceState(resourceName):find('start') then return end
+
 SetTimeout(0, function()
-    local RSG = exports['rsg-core']:GetCoreObject()
+    local RSG = exports[resourceName]:GetCoreObject()
 
     GetPlayer = RSG.Functions.GetPlayer
 
@@ -50,7 +54,7 @@ SetTimeout(0, function()
 end)
 
 function GetCharacterId(player)
-    return tonumber(player.PlayerData.citizenid)
+    return player.PlayerData.citizenid
 end
 
 local groups = { 'job', 'gang' }
