@@ -3,14 +3,12 @@ rdr3_warning 'I acknowledge that this is a prerelease build of RedM, and I am aw
 game 'rdr3'
 lua54 'yes'
 
---[[ Resource Information ]]--
-name         'ox_doorlock'
-version      '1.18.0-redm'
-license      'GPL-3.0-or-later'
-author       'Overextended'
-repository   'https://github.com/overextended/ox_doorlock'
+name 'ox_doorlock'
+description 'doorlock system for RSG RedM Framework'
+version '2.0.0'
+license 'GPL-3.0-or-later'
+author 'Overextended & RSG'
 
---[[ Manifest ]]--
 shared_scripts {
     '@ox_lib/init.lua',
     'config.lua',
@@ -24,6 +22,7 @@ client_scripts {
 server_scripts {
     '@oxmysql/lib/MySQL.lua',
     'server/main.lua',
+    'server/versionchecker.lua',
 }
 
 ui_page 'web/build/index.html'
