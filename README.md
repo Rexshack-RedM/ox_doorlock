@@ -67,8 +67,9 @@ TriggerEvent('ox_doorlock:setState', mrpd_locker_rooms.id, state)
 ```lua
 AddEventHandler('ox_doorlock:stateChanged', function(source, doorId, state, usedItem)
     if usedItem == 'trainticket' then
-        local xPlayer = ESX.GetPlayerFromId(source)
-        xPlayer.removeInventoryItem(usedItem, 1)
+        local src = source
+        local Player = RSGCore.Functions.GetPlayer(src)
+        Player.Functions.RemoveItem(usedItem, 1)
     end
 end)
 ```
