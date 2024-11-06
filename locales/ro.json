@@ -1,0 +1,18 @@
+{
+  "unlocked_door": "Usa deblocata",
+  "locked_door": "Usa blocata",
+  "lock_door": "[E] Blocheaza usa",
+  "unlock_door": "[E] Deblocheaza usa",
+  "door_lock": "Securitate usa",
+  "passcode": "Cod de acces",
+  "lockpick_broke": "Croseta ta s-a rupt",
+  "pick_lock": "Croseteaza usa",
+  "add_lock": "Adauga securitate usa",
+  "edit_lock": "Editeaza securitate usa",
+  "remove_lock": "Elimina securitate usa",
+  "cannot_unlock": "Nu poti debloca usa",
+  "cannot_lock": "Nu poti bloca usa",
+  "create_modify_lock": "Creaza o securitate pentru usa sau modifica una existenta",
+  "add_door_textui": "**Creaza usa noua**  \nInteractioneaza cu [LMB]  \nAnuleaza cu [RMB]",
+  "command_closest": "Deschide UI direct pentru securitatea usa cea mai apropiata"
+}
