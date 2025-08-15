@@ -243,8 +243,7 @@ RegisterNetEvent('ox_doorlock:editDoorlock', function(id, data)
 
     if data then
         data.zone = door.zone or ZoneList[GetMapZoneAtCoords(door.coords.x, door.coords.y, door.coords.z, 10)]
-
-        -- hacky method to resolve a bug with "closest door" by forcing a distance recalculation
+            
         if door.distance < 20 then door.distance = 80 end
     elseif ClosestDoor?.id == id then
         ClosestDoor = nil
@@ -333,41 +332,53 @@ CreateThread(function()
     local unlockDoor = locale('unlock_door')
     local showUI
 
+    RequestStreamedTextureDict('generic_textures', false)
+    RequestStreamedTextureDict('inventory_items', false)
+    while not HasStreamedTextureDictLoaded('generic_textures') or not HasStreamedTextureDictLoaded('inventory_items') do
+        Wait(0)
+    end
     while true do
+        Wait(0)
+        ClosestDoor = nil
         local num = #nearbyDoors
-
         if num > 0 then
             for i = 1, num do
                 local door = nearbyDoors[i]
-
                 if door.distance < door.maxDistance then
                     if not ClosestDoor or door.distance < ClosestDoor.distance then
                         ClosestDoor = door
                     end
                 end
             end
-        else
-            ClosestDoor = nil
         end
 
         if ClosestDoor and ClosestDoor.distance < ClosestDoor.maxDistance then
-            if Config.DrawTextUI and not ClosestDoor.hideUi and ClosestDoor.state ~= showUI then
-                lib.showTextUI(ClosestDoor.state == 0 and lockDoor or unlockDoor)
-                showUI = ClosestDoor.state
+            local onScreen, sx, sy = GetScreenCoordFromWorldCoord(ClosestDoor.coords.x,ClosestDoor.coords.y - 0.2,ClosestDoor.coords.z)
+            if Config.DrawTextUI and not ClosestDoor.hideUi then
+                if ClosestDoor.state ~= showUI then
+                    lib.showTextUI(ClosestDoor.state == 0 and lockDoor or unlockDoor)
+                    showUI = ClosestDoor.state
+                end
             end
 
+            if not Config.DrawTextUI and not ClosestDoor.hideUi and onScreen then
+                if ClosestDoor.state == 1 then
+                    DrawSprite("generic_textures", "lock", sx, sy + 0.0125, 0.02, 0.02, 0.1, 255, 0, 0, 255)
+                else
+                    DrawSprite("inventory_items", "consumable_lock_breaker", sx, sy + 0.0125, 0.02, 0.02, 0.1, 0, 255, 0, 255)
+                end
+            end
             if not PickingLock and IsDisabledControlJustReleased(0, `INPUT_LOOT`) then
                 useClosestDoor()
             end
-        elseif showUI then
-            lib.hideTextUI()
-            showUI = nil
+        else
+            if showUI then
+                lib.hideTextUI()
+                showUI = nil
+            end
         end
-
-        Wait(num > 0 and 0 or 500)
     end
 end)
-
 
 exports('useClosestDoor', useClosestDoor)
 exports('getClosestDoor', function() return ClosestDoor end)
