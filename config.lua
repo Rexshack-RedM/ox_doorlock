@@ -6,7 +6,7 @@ Config = {}
 Config.Notify = true
 
 ---Create a persistent notification while in-range of a door, prompting to lock/unlock.
-Config.DrawTextUI = true
+Config.DrawTextUI = false
 
 ---Allow the specified ace principal to use 'command.doorlock'.
 Config.CommandPrincipal = 'group.admin'
