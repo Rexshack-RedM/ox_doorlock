@@ -5,7 +5,7 @@ lua54 'yes'
 
 name 'ox_doorlock'
 description 'doorlock system for RSG RedM Framework'
-version '2.0.0'
+version '2.0.1'
 license 'GPL-3.0-or-later'
 author 'Overextended & RSG'
 
